@@ -91,7 +91,11 @@ export default {
     currentStudents: [],
     currentStudentEmail: '',
     currentStudent: {},
+
+    //-----------公告管理----------
+    allNews: [],
+
     // --------  通用 -------------
-    currentActiveKey: "1"
+    currentActiveKey: "1",
 }
 

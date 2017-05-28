@@ -206,3 +206,71 @@ export const removeStudentAction = ({ dispatch }, email) => {
     })
 }
 
+export const getAllNews = ({ dispatch }) => {
+    return new Promise((resolve, reject) => {
+        fetch('/api/getallnews', {
+            method: 'POST',
+            headers: {
+                'Accept': 'application/json, text/plain, */*',
+                'Content-Type': 'application/json'
+            }
+        }).then(res => res.json()).then(res => {
+            dispatch('SET_ALL_NEWS', res);
+            resolve();
+        }).catch(err => {
+            dispatch('SET_ALL_NEWS', []);
+            reject();
+        })
+    })
+}
+
+
+
+export const removeNewsAction = ({ dispatch }, id) => {
+    return new Promise((resolve, reject) => {
+        fetch('/api/removenews', {
+            method: 'POST',
+            headers: {
+                'Accept': 'application/json, text/plain, */*',
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify({
+                id: id
+            })
+        }).then(res => res.json()).then(res => {
+            if (res.ok) {
+                dispatch('REMOVE_STUDENT', id);
+                resolve();
+            } else {
+                reject();
+            }
+        }).catch(err => {
+            reject();
+        })
+    })
+}
+
+export const addNews = ({ dispatch }, news) => {
+    return new Promise((resolve, reject) => {
+        fetch('/api/addnews', {
+            method: 'POST',
+            headers: {
+                'Accept': 'application/json, text/plain, */*',
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify({
+                news: news
+            })
+        }).then(res => res.json()).then(res => {
+            if (res.ok) {
+                dispatch('ADD_NEWS', news);
+                resolve();
+            } else {
+                reject();
+            }
+        }).catch(err => {
+            reject();
+        })
+    })
+}
+

@@ -68,7 +68,24 @@ export default {
         if (index >= 0) {
             state.currentStudents.splice(index, 1);
         }
+    },
 
+    SET_ALL_NEWS(state, allNews) {
+        state.allNews = allNews
+    },
+
+    REMOVE_STUDENT(state, id) {
+        var index = state.allNews.findIndex((item) => {
+            return item.id === id
+        })
+        if (index >= 0) {
+            state.allNews.splice(index, 1);
+        }
+    },
+
+    ADD_NEWS(state, news) {
+        if (news) {
+            state.allNews.push(news)
+        }
     }
-
 }
