@@ -45,7 +45,7 @@ router.map({
     name: 'student-list',
     component: studentList
   },
-  '/announcements': {
+  '/news': {
     name: 'news',
     component: news
   },

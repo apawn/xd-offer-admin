@@ -16,7 +16,7 @@
                 毕业生
             </Menu-item>
             <Menu-item key="3"
-                       @click="routerGo('/announcements')">
+                       @click="routerGo('/news')">
                 公告
             </Menu-item>
             <Menu-item key="4"
