@@ -52,13 +52,19 @@
                 </li>
             </ul>
         </div>
+        <div class="remove-wrapper">
+            <i-button type="error"
+                      @click="removeCompany()">
+                删除公司
+            </i-button>
     
+        </div>
     </div>
 </template>
 
 
 <script>
-import { getCurrentCompanyDetail, commentCompany, setSignInModal, deliveryAction, setCurrentActiveKey } from '../../vuex/actions.js'
+import { routerGo, getCurrentCompanyDetail, commentCompany, setSignInModal, deliveryAction, setCurrentActiveKey, removeCompanyAction } from '../../vuex/actions.js'
 
 export default {
     data() {
@@ -67,6 +73,16 @@ export default {
         }
     },
     methods: {
+        removeCompany() {
+            this.removeCompanyAction(this.company.name, this.company.email).then(() => {
+                this.$Message.success('删除成功');
+                setTimeout(() => {
+                    this.routerGo('/company-list');
+                }, 200);
+            }).catch(() => {
+                this.$Message.error('删除失败');
+            })
+        }
     },
     created() {
         this.setCurrentActiveKey(1);
@@ -83,11 +99,13 @@ export default {
             company: state => state.currentCompany
         },
         actions: {
+            routerGo,
             getCurrentCompanyDetail,
             commentCompany,
             setSignInModal,
             deliveryAction,
-            setCurrentActiveKey
+            setCurrentActiveKey,
+            removeCompanyAction
         }
     }
 }
@@ -170,6 +188,10 @@ export default {
                 height: 150px;
             }
         }
+    }
+    .remove-wrapper {
+        margin-top: 30px;
+        position: relative;
     }
 }
 </style>

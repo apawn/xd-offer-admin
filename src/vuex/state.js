@@ -90,6 +90,7 @@ export default {
     currentStudentPage: 0,
     currentStudents: [],
     currentStudentEmail: '',
+
     currentStudent: {},
 
     //-----------公告管理----------

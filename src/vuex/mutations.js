@@ -1,5 +1,5 @@
 import { router } from '../router.js'
-
+import Vue from 'Vue'
 export default {
     ROUTE_GO(state, href, anchorSelector = "body") {
         // router.go(href);
@@ -58,8 +58,13 @@ export default {
     SET_STUDENT_TOTAL_COUNT(state, totalCount) {
         state.totalStudentCount = totalCount.count;
     },
-    SET_CURRENT_STUDENT_DETAIL(state, student) {
-        state.currentStudent = student;
+    SET_CURRENT_STUDENT(state, email) {
+        var student = state.currentStudents.find((item) => {
+            return item.email == email
+        })
+        if (student) {
+            state.currentStudent = student;
+        }
     },
     REMOVE_STUDENT(state, email) {
         var index = state.currentStudents.findIndex((item) => {
@@ -95,5 +100,11 @@ export default {
         if (index >= 0) {
             state.allNews.splice(index, 1);
         }
+    },
+    UPDATE_NEWS(state, news) {
+        var index = state.allNews.findIndex((item) => {
+            return item.id == news.id
+        })
+        Vue.set(state.allNews, index, news);
     }
 }

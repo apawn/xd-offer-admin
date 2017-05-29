@@ -8,6 +8,7 @@ import companyList from './components/company-list/company-list'
 import company from './components/company/company'
 
 import studentList from './components/student-list/student-list'
+import student from './components/student/student.vue'
 import news from './components/news/news'
 import newDetail from './components/news-detail/news-detail'
 import addNews from './components/add-news/add-news'
@@ -47,6 +48,10 @@ router.map({
   '/students': {
     name: 'student-list',
     component: studentList
+  },
+  '/students/:name': {
+    name: 'student',
+    component: student
   },
   '/news': {
     name: 'news',

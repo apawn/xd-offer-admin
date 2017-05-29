@@ -11,7 +11,7 @@
             </i-button>
     
             <i-button type="success"
-                      @click="removeNews()">
+                      @click="goUpdateNews(currentNews.id)">
                 修改公告
             </i-button>
         </div>
@@ -20,8 +20,9 @@
 
 <script>
 
-import { routerGo, setCurrentActiveKey, removeNewsAction } from '../../vuex/actions.js'
+import { routerGo, setCurrentActiveKey, removeNewsAction, goUpdateNews } from '../../vuex/actions.js'
 export default {
+
     data() {
         return {}
     },
@@ -46,7 +47,8 @@ export default {
         actions: {
             routerGo,
             setCurrentActiveKey,
-            removeNewsAction
+            removeNewsAction,
+            goUpdateNews
         }
     }
 }

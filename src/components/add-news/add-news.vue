@@ -68,7 +68,7 @@ export default {
 
                         setTimeout(() => {
                             this.self.routerGo('/news');
-                        }, 400);
+                        }, 200);
                     }).catch(err => {
                         console.log(err);
                         this.$Message.error('添加失败');

@@ -206,6 +206,12 @@ export const removeStudentAction = ({ dispatch }, email) => {
     })
 }
 
+export const goStudentDetail = ({ dispatch }, name, email) => {
+    dispatch('SET_CURRENT_STUDENT', email);
+    routerGo({ dispatch }, `/students/${name}`);
+}
+
+
 export const getAllNews = ({ dispatch }) => {
     return new Promise((resolve, reject) => {
         fetch('/api/getallnews', {
@@ -289,5 +295,26 @@ export const goUpdateNews = ({ dispatch }, id) => {
 }
 
 export const updateNews = ({ dispatch }, news) => {
-
+    return new Promise((resolve, reject) => {
+        fetch('/api/updatenews', {
+            method: 'POST',
+            headers: {
+                'Accept': 'application/json, text/plain, */*',
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify({
+                news: news
+            })
+        }).then(res => res.json()).then(res => {
+            if (res.ok) {
+                dispatch('UPDATE_NEWS', news);
+                resolve();
+            } else {
+                reject();
+            }
+        }).catch(err => {
+            reject();
+        })
+    })
 }
+

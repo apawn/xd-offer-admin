@@ -14,7 +14,7 @@
 </template>
 
 <script>
-import { routerGo, getCurrentStudentPage, getStudentsCount, getCurrentStudentDetail, setCurrentActiveKey, removeStudentAction } from '../../vuex/actions.js'
+import { routerGo, getCurrentStudentPage, getStudentsCount, goStudentDetail, setCurrentActiveKey, removeStudentAction } from '../../vuex/actions.js'
 export default {
     data() {
         return {
@@ -23,7 +23,7 @@ export default {
                 title: '学生姓名',
                 key: "name",
                 render: function (row, column, index) {
-                    return `<a @click="routerGo('/student/${row.name}')"{>${row.name}</a>`
+                    return `<a @click="goStudentDetail('${row.name}','${row.email}')"{>${row.name}</a>`
                 }
             }, {
                 title: '学院',
@@ -56,13 +56,6 @@ export default {
         }
     },
     methods: {
-        studentDetail(name) {
-            this.getCurrentStudentDetail(name).then(res => {
-                this.routerGo(`/home/${name}`);
-            }).catch(err => {
-                return;
-            })
-        },
         pageChange(currentPage) {
             this.getCurrentStudentPage(currentPage);
         },
@@ -102,9 +95,9 @@ export default {
             routerGo,
             getCurrentStudentPage,
             getStudentsCount,
-            getCurrentStudentDetail,
             setCurrentActiveKey,
-            removeStudentAction
+            removeStudentAction,
+            goStudentDetail
         }
     }
 

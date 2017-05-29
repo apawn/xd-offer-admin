@@ -30,7 +30,7 @@
                           @click="handleReset('formValidate')"
                           style="margin-left: 8px">重置</i-button>
                 <i-button type="error"
-                          @click="removeNews('')"
+                          @click="removeNews()"
                           style="margin-left: 8px">删除</i-button>
             </Form-item>
         </i-form>
@@ -66,10 +66,9 @@ export default {
             this.$refs[name].validate((valid) => {
                 if (valid) {
                     this.updateNews(this.formValidate).then(() => {
-                        this.$Message.success('添加成功');
-
+                        this.$Message.success('修改成功');
                         setTimeout(() => {
-                            this.self.routerGo('/news');
+                            this.routerGo('/news');
                         }, 200);
                     }).catch(err => {
                         console.log(err);
@@ -82,6 +81,17 @@ export default {
         },
         handleReset(name) {
             this.$refs[name].resetFields();
+        },
+        removeNews() {
+            this.removeNewsAction(this.currentNews.id).then(() => {
+                this.$Message.success('删除成功');
+                setTimeout(() => {
+                    this.routerGo('/news');
+                }, 200);
+            }).catch(err => {
+                console.log(err);
+                this.$Message.error('删除失败');
+            })
         }
 
     },
@@ -95,7 +105,8 @@ export default {
             setCurrentActiveKey,
             removeNewsAction,
             setCurrentNews,
-            addNews
+            addNews,
+            updateNews
         }
     }
 
