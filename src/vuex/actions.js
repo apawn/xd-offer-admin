@@ -1,7 +1,7 @@
+import { router } from '../router.js'
+
 export const routerGo = ({ dispatch }, href, anchor) => {
-
     var res = dispatch('ROUTE_GO', href, anchor);
-
 }
 
 export const signIn = ({ dispatch }, username, password) => {
@@ -239,7 +239,7 @@ export const removeNewsAction = ({ dispatch }, id) => {
             })
         }).then(res => res.json()).then(res => {
             if (res.ok) {
-                dispatch('REMOVE_STUDENT', id);
+                dispatch('REMOVE_NEWS', id);
                 resolve();
             } else {
                 reject();
@@ -274,3 +274,20 @@ export const addNews = ({ dispatch }, news) => {
     })
 }
 
+export const goCurrentNews = ({ dispatch }, id) => {
+    setCurentNews({ dispatch }, id);
+    router.go({ name: 'news-detail', params: { id: id } });
+}
+
+export const setCurentNews = ({ dispatch }, id) => {
+    dispatch('SET_CURRENT_NEWS', id);
+}
+
+export const goUpdateNews = ({ dispatch }, id) => {
+    setCurentNews({ dispatch }, id);
+    router.go('/news/update-news');
+}
+
+export const updateNews = ({ dispatch }, news) => {
+
+}

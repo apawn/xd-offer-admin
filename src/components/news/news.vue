@@ -16,7 +16,7 @@
 </template>
 
 <script>
-import { routerGo, getAllNews, setCurrentActiveKey, removeNewsAction } from '../../vuex/actions.js'
+import { routerGo, getAllNews, setCurrentActiveKey, removeNewsAction, setCurrentNews, goCurrentNews, goUpdateNews } from '../../vuex/actions.js'
 
 export default {
     data() {
@@ -26,7 +26,7 @@ export default {
                 title: '标题',
                 key: 'header',
                 render: function (row) {
-                    return `<a @click="newDetail('${row.id}')">${row.header}</a>`
+                    return `<a @click="goCurrentNews('${row.id}')">${row.header}</a>`
                 },
             }, {
                 title: '时间',
@@ -44,7 +44,7 @@ export default {
         </i-button>
         <i-button type="success"
                   size="small"
-                  @click="removeNews('${row.id}')">
+                  @click="goUpdateNews('${row.id}')">
             修改
         </i-button>
     </Button-group>`
@@ -67,21 +67,17 @@ export default {
         }
     },
     methods: {
-        newDetail(id) {
-            this.getCurrentNewDetail(id).then(res => {
-                this.routerGo(`/home/${id}`);
-            }).catch(err => {
-                return;
-            })
-        },
-        removeNews(email) {
-            console.log(email);
-            this.removeNewsAction(email).then(() => {
+        removeNews(id) {
+            console.log(id);
+            this.removeNewsAction(id).then(() => {
                 this.$Message.success('删除成功');
             }).catch(err => {
                 this.$Message.error('删除失败');
             })
-        }
+        },
+        addNews() {
+            this.routerGo('/news/add-news');
+        },
     },
 
     created() {
@@ -95,9 +91,11 @@ export default {
         actions: {
             routerGo,
             getAllNews,
-            // getCurrentNewDetail,
+            setCurrentNews,
             setCurrentActiveKey,
-            removeNewsAction
+            removeNewsAction,
+            goCurrentNews,
+            goUpdateNews
         }
     }
 

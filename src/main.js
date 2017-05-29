@@ -4,18 +4,17 @@ import App from './App'
 import iView from 'iview'
 
 // 组件路由导入
-import home from './components/home/home'
+import companyList from './components/company-list/company-list'
+import company from './components/company/company'
+
 import studentList from './components/student-list/student-list'
 import news from './components/news/news'
-import my from './components/my/my'
-import signUp from './components/sign-up/sign-up'
-import basicInfo from './components/basic-info/basic-info';
-import keyInfo from './components/key-info/key-info.vue'
-import uploadResume from './components/upload-resume/upload-resume'
-import forget from './components/forget/forget'
+import newDetail from './components/news-detail/news-detail'
+import addNews from './components/add-news/add-news'
+import updateNews from './components/update-news/update-news'
 
 // home 子路由
-import company from './components/company/company'
+
 
 // 组件样式
 import 'font-awesome/less/font-awesome.less'
@@ -35,11 +34,15 @@ let app = Vue.extend(App);
 
 router.map({
   '/': {
-    component: home
+    component: companyList
   },
-  '/home': {
-    name: 'home',
-    component: home,
+  '/company-list': {
+    name: 'company-list',
+    component: companyList,
+  },
+  '/company/:companyname': {
+    name: 'company',
+    component: company
   },
   '/students': {
     name: 'student-list',
@@ -49,35 +52,18 @@ router.map({
     name: 'news',
     component: news
   },
-  '/my': {
-    name: 'my',
-    component: my
+  '/news/:id': {
+    name: 'news-detail',
+    component: newDetail
   },
-  '/sign-up': {
-    name: 'signUp',
-    component: signUp
+  '/news/add-news': {
+    name: 'addNews',
+    component: addNews
   },
-  '/company/:companyname': {
-    name: 'company',
-    component: company
+  '/news/update-news': {
+    name: 'update-news',
+    component: updateNews
   },
-  '/basic-info': {
-    name: 'basicInfo',
-    component: basicInfo
-  },
-  '/key-info': {
-    name: 'keyInfo',
-    component: keyInfo
-  },
-  '/upload-resume': {
-    name: 'uploadResume',
-    component: uploadResume
-  },
-  '/forget': {
-    name: 'forget',
-    component: forget
-  }
-
 })
 
 router.start(app, '#app');

@@ -8,7 +8,7 @@
               theme="light"
               :active-key="currentActiveKey">
             <Menu-item key="1"
-                       @click="routerGo('/home')">
+                       @click="routerGo('/company-list')">
                 公司
             </Menu-item>
             <Menu-item key="2"

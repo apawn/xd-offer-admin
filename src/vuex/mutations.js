@@ -74,18 +74,26 @@ export default {
         state.allNews = allNews
     },
 
-    REMOVE_STUDENT(state, id) {
-        var index = state.allNews.findIndex((item) => {
-            return item.id === id
-        })
-        if (index >= 0) {
-            state.allNews.splice(index, 1);
-        }
-    },
 
     ADD_NEWS(state, news) {
         if (news) {
             state.allNews.push(news)
+        }
+    },
+    SET_CURRENT_NEWS(state, id) {
+        var news = state.allNews.find((item) => {
+            return item.id === id;
+        })
+        if (news) {
+            state.currentNews = news;
+        }
+    },
+    REMOVE_NEWS(state, id) {
+        var index = state.allNews.findIndex((item) => {
+            return item.id == id
+        })
+        if (index >= 0) {
+            state.allNews.splice(index, 1);
         }
     }
 }

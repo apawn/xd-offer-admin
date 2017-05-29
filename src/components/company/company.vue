@@ -20,11 +20,6 @@
                                 <h6 class="name">{{item.name}}</h6>
                                 <span class="salary">月薪:<i>{{item.salary}}</i> </span>
                             </i-col>
-                            <i-col span="6">
-                                <i-button @click="deliver(item.name)"
-                                          :type="hasDelivered(item.name).type"
-                                          :disabled="hasDelivered(item.name).disabled">{{hasDelivered(item.name).content}}</i-button>
-                            </i-col>
                         </Row>
                         <p class="job"
                            v-html="item.job"></p>
@@ -56,14 +51,6 @@
     
                 </li>
             </ul>
-            <div class="comment">
-                <h4 class="border-left">我的评价</h4>
-                <textarea class="mycomment"
-                          v-model="content">
-                </textarea>
-                <i-button type="success"
-                          @click="comment()">提交评价</i-button>
-            </div>
         </div>
     
     </div>
@@ -80,62 +67,6 @@ export default {
         }
     },
     methods: {
-        comment() {
-            if (this.user) {
-                this.commentCompany(this.company.email, this.content).then(res => {
-                    this.$Message.success('评论成功');
-                    this.content = "";
-                })
-            } else {
-                this.setSignInModal(true);
-                return;
-            }
-        },
-        deliver(position) {
-            if (this.user) {
-                this.deliveryAction(this.user.email, this.company.email, position).then(res => {
-                    this.$Message.success('投递成功');
-                }).catch(err => {
-                    this.$Message.success('投递失败');
-                })
-            } else {
-                this.setSignInModal(true);
-                return;
-            }
-        },
-
-        hasDelivered(position) {
-            if (!this.user) {
-                return {
-                    type: 'primary',
-                    content: '现在投递',
-                    disable: false
-                }
-            }
-            var positions = this.company.position,
-                flag,
-                receives;
-            for (let i = 0; i < positions.length; i++) {
-                if (positions[i].name === position) {
-                    receives = positions[i].received;
-                    for (let j = 0; j < receives.length; j++) {
-                        if (receives[j].studentEmail === this.user.email) {
-                            return {
-                                type: 'success',
-                                content: '已经投递',
-                                disabled: true
-                            }
-                        }
-                    }
-                }
-            }
-            return {
-                type: 'primary',
-                content: '现在投递',
-                disable: false
-            };
-
-        }
     },
     created() {
         this.setCurrentActiveKey(1);

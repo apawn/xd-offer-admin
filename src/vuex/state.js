@@ -94,6 +94,7 @@ export default {
 
     //-----------公告管理----------
     allNews: [],
+    currentNews: {},
 
     // --------  通用 -------------
     currentActiveKey: "1",
